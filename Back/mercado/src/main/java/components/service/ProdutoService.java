@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import components.repository.ProdutoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoService {
@@ -19,6 +20,11 @@ public class ProdutoService {
 
     public ProdutoModel cadastrarProduto(ProdutoModel obj){
         return repository.save(obj);
+    }
+
+    public ProdutoModel listarProdutoId (Long id){
+        Optional<ProdutoModel> obj=repository.findById(id);
+        return obj.get();
     }
 
 }

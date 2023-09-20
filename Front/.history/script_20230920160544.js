@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const productList = document.getElementById('produto-list');
     const produtoForm = document.getElementById('produto-form');
     const cadastrarButton = document.getElementById('cadastrar');
-    const buscarForm = document.getElementById('buscar-form'); 
-    const buscarButton = document.getElementById('buscar'); 
+    const buscarForm = document.getElementById('buscar-form'); // Novo formulário
+    const buscarButton = document.getElementById('buscar'); // Novo botão de busca
 
     function listarProdutos() {
         fetch('http://localhost:8080/produtos') 
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
+// Função para buscar um produto por ID
 function buscarProdutoPorId(id) {
     fetch(`http://localhost:8080/produtos/${id}`)
         .then(response => response.json())

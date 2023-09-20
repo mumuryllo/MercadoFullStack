@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const productList = document.getElementById('produto-list');
     const produtoForm = document.getElementById('produto-form');
     const cadastrarButton = document.getElementById('cadastrar');
-    const buscarForm = document.getElementById('buscar-form'); 
-    const buscarButton = document.getElementById('buscar'); 
 
     function listarProdutos() {
         fetch('http://localhost:8080/produtos') 
@@ -51,19 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
     listarProdutos(); 
 
     cadastrarButton.addEventListener('click', cadastrarProduto);
-
-
-    buscarButton.addEventListener('click', () => {
-        const produtoId = document.getElementById('produto-id').value;
-        buscarProdutoPorId(produtoId);
-    });
 });
 
-
+// Função para buscar um produto por ID
 function buscarProdutoPorId(id) {
-    fetch(`http://localhost:8080/produtos/${id}`)
+    fetch(`http://localhost:8080/api/produtos/${id}`)
         .then(response => response.json())
         .then(produto => {
+           
             const detalhesProduto = document.getElementById('detalhes-produto');
             detalhesProduto.innerHTML = `
                 <h2>Detalhes do Produto</h2>
@@ -73,9 +66,5 @@ function buscarProdutoPorId(id) {
                 <p><strong>Quantidade em Estoque:</strong> ${produto.quantidadeEstoque}</p>
             `;
         })
-        .catch(error => {
-            console.error('Erro ao buscar produto por ID: ', error);
-            const detalhesProduto = document.getElementById('detalhes-produto');
-            detalhesProduto.innerHTML = '<p>Produto não encontrado ou erro na busca.</p>';
-        });
+        .catch(error => console.error('Erro ao buscar produto por ID: ', error));
 }

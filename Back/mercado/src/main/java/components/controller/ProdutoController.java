@@ -2,6 +2,7 @@ package components.controller;
 
 import components.model.ProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import components.service.ProdutoService;
 
@@ -19,6 +20,12 @@ public class ProdutoController {
     @GetMapping
     public List<ProdutoModel> listarProdutos() {
         return service.listarProdutos();
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProdutoModel> findById(@PathVariable Long id){
+        ProdutoModel obj = service.listarProdutoId(id);
+        return  ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
